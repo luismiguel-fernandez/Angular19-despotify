@@ -10,29 +10,31 @@
     </div>
 </div>
 
-<ng-container >
-    <div class="row">
-      <div class="col-lg-3">
-        <h3>Songs</h3>
-      </div>
-      <div class="col-lg-9 form-switch form-check-reverse">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="true">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Toggle card/rows views</label>
-      </div>
+<div class="row">
+  <div class="col-lg-3">
+    <h3>Songs</h3>
+  </div>
+  <div class="col-lg-9 form-switch form-check-reverse">
+    <input [(ngModel)]="view" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="true">
+    <label class="form-check-label" for="flexSwitchCheckChecked">Toggle card/rows views</label>
+  </div>
+</div>
+<div class="row">
+  @if (view) {
+    <!-- Songs in cards view -->
+    <div class="row row-cols-md-5">
+      <!-- LISTADO DE CANCIONES TARJETA -->
+      @for (song of getSongs(); track $index) {
+        <app-song-card [song]="song"></app-song-card>
+      }
     </div>
-    <div class="row">
-        <!-- Songs in cards view -->
-        <div class="row row-cols-md-5">
-          <!-- LISTADO DE CANCIONES TARJETA -->
-          @for (song of getSongs(); track $index) {
-            <p>{{song.title}}</p>
-           }
-        </div>
-        <!-- Songs in rows view -->
-        <ng-template #rowView>
-          <ul class="list-group">
-          	<!-- LISTADO DE CANCIONES FILA -->
-          </ul>
-        </ng-template>
-    </div>
-</ng-container>
+  } @else {
+    <!-- Songs in rows view -->
+    <ul class="list-group">
+      <!-- LISTADO DE CANCIONES FILA -->
+      @for (song of getSongs(); track $index) {
+        <app-song-row [song]="song"></app-song-row>
+      }
+    </ul>
+  }
+</div>

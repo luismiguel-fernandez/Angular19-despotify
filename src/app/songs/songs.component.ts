@@ -1,30 +1,22 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data.service';
+import { SongCardComponent } from '../song-card/song-card.component';
+import { FormsModule } from '@angular/forms';
+import { SongRowComponent } from "../song-row/song-row.component";
 
 @Component({
   selector: 'app-songs',
-  imports: [],
+  imports: [SongCardComponent, FormsModule, SongRowComponent],
   templateUrl: './songs.component.html',
   styles: ``
 })
 export class SongsComponent {
-  private songs:any[] = []
   
-  constructor(private data:DataService) {
-    this.getSongsFromApi()
-  }
-  
-  getSongsFromApi() {
-    this.data.getSongs().subscribe(
-      json => {
-        let temp:any = json
-        this.songs = temp
-        console.log(this.songs)
-      }
-    )
-  }
+  view:boolean = true
 
+  constructor(private data:DataService) {}
+  
   getSongs() {
-    return this.songs
+    return this.data.getSongs()
   }
 }

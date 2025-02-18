@@ -1,8 +1,12 @@
 <div class="card text-center bg-light mb-2 mr-2">
   <div class="card-body">
-      <h5 class="card-title">"<!-- TITULO -->"</h5>
-      <span><!-- ARTISTA --></span>
-      <p class="card-text"><!-- DURACION --></p>
-      <button type="button" class="btn btn-outline-info">Add to playlist</button>
+      <h5 class="card-title">"{{song.title}}"</h5>
+      <span>{{getArtistById(song.artist).name}}</span>
+      <p class="card-text">{{song.length | secondsToMinSecs }}</p>
+      @if (!isAlreadyInPlaylist() ) {
+        <button (click)="addToPlaylist()" type="button" class="btn btn-outline-success">Add to playlist</button>
+      } @else {
+        <button (click)="removeFromPlaylist()" type="button" class="btn btn-outline-danger">Remove from playlist</button>
+      }
   </div>
 </div>
