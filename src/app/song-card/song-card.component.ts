@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { DataService } from '../data.service';
 import { SecondsToMinSecsPipe } from '../seconds-to-min-secs.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-song-card',
-  imports: [ SecondsToMinSecsPipe ],
+  imports: [ SecondsToMinSecsPipe, RouterLink ],
   templateUrl: './song-card.component.html',
   styles: ``
 })

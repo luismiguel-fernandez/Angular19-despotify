@@ -33,6 +33,11 @@ export class DataService {
   addToPlaylist(song:any) {
     if (!this.isAlreadyInPlaylist(song)) {
       this.playlists[this.playlists.length-1].songs.push(song.id)
+      //ordenar playlist de menor a mayor id de canción
+      this.playlists[this.playlists.length-1].songs.sort( (a:number,b:number) => {
+        return a-b
+      } )
+      console
     }
   }
 
@@ -42,6 +47,10 @@ export class DataService {
 
   getPlaylists() {
     return this.playlists
+  }
+
+  getSongById(songId:number) {
+    return this.songs.find( s => s.id == songId )
   }
 
   getSongs() {
